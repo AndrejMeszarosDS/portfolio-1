@@ -1,0 +1,55 @@
+---
+import Container from "../components/Container.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+import { projects } from "../data/projects";
+import { getTranslation } from "../i18n/index";
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = "sk" } = Astro.props;
+
+const t = (key: string) => getTranslation(lang, key);
+---
+
+<section
+  id="work"
+  class="py-32 relative overflow-hidden"
+>
+  <!-- Background decoration -->
+  <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-cyan-400/10 to-transparent rounded-full blur-3xl"></div>
+
+  <Container>
+    <div class="scroll-reveal">
+      <SectionTitle
+        subtitle={t('projects.subtitle')}
+        title={t('projects.title')}
+      />
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-2 mt-16">
+
+      {projects
+        .slice()
+        .sort((a, b) => b.year - a.year)
+        .map((project, index) => (
+          <div class={`scroll-reveal-${index % 2 === 0 ? 'left' : 'right'}`} style={`animation-delay: ${index * 0.1}s`}>
+            <ProjectCard
+              title={project.title}
+              category={project.category}
+              year={project.year}
+              image={project.image}
+              video={project.video}
+              slug={project.slug}
+            />
+          </div>
+      ))}
+
+    </div>
+
+  </Container>
+
+</section>

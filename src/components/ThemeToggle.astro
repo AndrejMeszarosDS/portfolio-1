@@ -1,0 +1,85 @@
+---
+// Theme toggle with sound effects
+---
+
+<div id="theme-toggle" class="fixed top-24 right-4 z-40">
+  <button 
+    id="theme-btn"
+    class=" w-10 h-10 rounded-full glass flex items-center justify-center hover-lift transition-all duration-300"
+    aria-label="Toggle theme"
+  >
+    <svg id="sun-icon" class="w-5 h-5 text-yellow-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+    </svg>
+    <svg id="moon-icon" class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+    </svg>
+  </button>
+</div>
+
+<style>
+  #theme-btn {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  function initThemeToggle() {
+    const themeBtn = document.getElementById('theme-btn');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    
+    if (!themeBtn || !sunIcon || !moonIcon) return;
+    
+    const storedTheme = window.localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let isDark = storedTheme ? storedTheme === 'dark' : prefersDark;
+
+    function applyTheme(darkMode: boolean) {
+      document.documentElement.classList.toggle('light', !darkMode);
+      sunIcon?.classList.toggle('hidden', darkMode);
+      moonIcon?.classList.toggle('hidden', !darkMode);
+      themeBtn?.setAttribute('aria-pressed', String(!darkMode));
+      window.localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+    }
+
+    applyTheme(isDark);
+
+    const lightModePrompts = {
+      en: [
+        'Light mode is a bold move. Are you sure?',
+        'This site shines in dark mode. Still want light?',
+        'Light mode is on the edge—continue anyway?'
+      ],
+      sk: [
+        'Svetlý režim je odvážny. Si si istý?',
+        'Tento web vyzerá najlepšie v tmavom režime. Napriek tomu pokračovať?',
+        'Svetlý režim je trochu risk. Pokračovať?'
+      ]
+    };
+
+    const getPrompt = () => {
+      const lang = document.documentElement.lang.startsWith('en') ? 'en' : 'sk';
+      const options = lightModePrompts[lang];
+      return options[Math.floor(Math.random() * options.length)];
+    };
+
+    themeBtn.addEventListener('click', () => {
+      const nextMode = !isDark;
+      if (!nextMode) {
+        const confirmLightMode = window.confirm(getPrompt());
+        if (!confirmLightMode) {
+          return;
+        }
+      }
+      isDark = nextMode;
+      applyTheme(isDark);
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeToggle);
+  } else {
+    initThemeToggle();
+  }
+</script>

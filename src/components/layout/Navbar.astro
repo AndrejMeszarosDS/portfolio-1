@@ -1,0 +1,53 @@
+---
+import Container from "../Container.astro";
+import MobileMenu from "../MobileMenu.astro";
+import LanguageSwitcher from "../LanguageSwitcher.astro";
+import { getLanguageFromUrl } from "../../i18n/index";
+
+const currentLang = getLanguageFromUrl(Astro.url.pathname);
+---
+
+<header class="fixed top-0 z-50 w-full border-b border-white/10 bg-black/50 backdrop-blur-xl transition-all duration-300">
+
+    <Container>
+
+        <div class="flex h-20 items-center justify-between">
+
+            <a
+                href={currentLang === "en" ? "/en" : "/"}
+                class="heading-font text-xl font-bold tracking-wide gradient-text hover-lift"
+            >
+                Simon Mészáros
+            </a>
+
+            <nav class="hidden lg:flex gap-8 text-sm items-center">
+
+                <a href={currentLang === "en" ? "/en#work" : "/#work"} class="relative text-neutral-400 hover:text-white transition-colors py-2">
+                    {currentLang === "en" ? "Projects" : "Projekty"}
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-cyan-400 transition-all duration-300 hover:w-full"></span>
+                </a>
+
+                <a href={currentLang === "en" ? "/en#about" : "/#about"} class="relative text-neutral-400 hover:text-white transition-colors py-2">
+                    {currentLang === "en" ? "About" : "O mne"}
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-cyan-400 transition-all duration-300 hover:w-full"></span>
+                </a>
+
+                <a href={currentLang === "en" ? "/en#contact" : "/#contact"} class="relative text-neutral-400 hover:text-white transition-colors py-2">
+                    {currentLang === "en" ? "Contact" : "Kontakt"}
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-yellow-400 to-cyan-400 transition-all duration-300 hover:w-full"></span>
+                </a>
+
+                <LanguageSwitcher currentLang={currentLang} />
+
+            </nav>
+
+            <div class="flex lg:hidden items-center gap-4">
+                <LanguageSwitcher currentLang={currentLang} />
+                <MobileMenu lang={currentLang} />
+            </div>
+
+        </div>
+
+    </Container>
+
+</header>

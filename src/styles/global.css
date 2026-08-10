@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --surface: #121212;
+  --text: #ffffff;
+  --text-secondary: #a1a1aa;
+  --primary: #ffffff;
+  --primary-hover: #e5e5e5;
+  --accent: #FFD60A;
+  --accent-secondary: #00D9FF;
+  --border: #262626;
+  --container: 1280px;
+}
+
+html.light {
+  --background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), rgba(226, 232, 240, 0.95) 35%, rgba(241, 245, 249, 1) 100%);
+  --surface: rgba(255, 255, 255, 0.9);
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --primary: #0f172a;
+  --primary-hover: #1e293b;
+  --accent: #d97706;
+  --accent-secondary: #38bdf8;
+  --border: rgba(148, 163, 184, 0.45);
+}
+
+html.light body {
+  background-attachment: fixed;
+  background-image: radial-gradient(circle at top left, rgba(255, 243, 205, 0.35), transparent 28%), radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.2), transparent 20%);
+}
+
+html.light .glass {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+html.light .gradient-border::before {
+  background: linear-gradient(135deg, #f59e0b 0%, #38bdf8 100%);
+}
+
+html.light ::selection {
+  background: #f59e0b;
+  color: #0f172a;
+}
+
+html.light .hover-lift:hover {
+  box-shadow: 0 18px 30px rgba(15, 23, 42, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+input,
+textarea {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+/* Profile image styling */
+.animate-scale-in img {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover img {
+  transform: scale(1.02);
+}
+html.light .hero-badge {
+  color: var(--text);
+}
+
+html.light .hero-badge .text-sm {
+  color: var(--text);
+}
+
+input,
+textarea {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: black;
+}
+
+.heading-font {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Glow effects */
+.glow-accent {
+  box-shadow: 0 0 40px rgba(255, 214, 10, 0.3);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 40px rgba(0, 217, 255, 0.3);
+}
+
+video {
+  transform: scale(1);
+  transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  object-fit: contain;
+  max-height: 75vh;
+}
+
+.group:hover video {
+  transform: scale(1.05);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-right {
+  animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Scroll-triggered animations */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.section {
+  padding: 8rem 0;
+}
+
+.section-large {
+  padding: 10rem 0;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Gradient borders */
+.gradient-border {
+  position: relative;
+  background: var(--surface);
+  border-radius: 1rem;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+  border-radius: 1rem;
+  z-index: -1;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: none;
+}
+
+.gradient-border:hover::before {
+  opacity: 0.6;
+}
+
+/* Smooth image hover */
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Smooth color transitions */
+* {
+  transition: background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Button hover improvements */
+a, button {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}

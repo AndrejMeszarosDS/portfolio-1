@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../sections/Hero.astro";
+import Projects from "../sections/Projects.astro";
+import About from "../sections/About.astro";
+import Contact from "../sections/Contact.astro";
+import { getLanguageFromUrl } from "../i18n/index";
+
+const lang = getLanguageFromUrl(Astro.url.pathname);
+---
+
+<BaseLayout title="Simon Mészáros - Portfólio" lang={lang}>
+
+  <Hero lang={lang} />
+  <Projects lang={lang} />
+  <About lang={lang} />
+  <Contact lang={lang} />
+
+</BaseLayout>

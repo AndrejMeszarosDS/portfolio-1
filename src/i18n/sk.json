@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "work": "Projekty",
+    "about": "O mne",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "available": "Otvorený na projekty",
+    "title": "Simon Mészáros",
+    "subtitle": "Video a motion graphics",
+    "description": "Robím videá, komerčné projekty a motion graphics. Zameriam sa na čistý strih, dobrú atmosféru a to aby to vyzeralo dobre.",
+    "cta1": "Napíš mi",
+    "cta2": "Moje práce"
+  },
+  "projects": {
+    "subtitle": "Moja práca",
+    "title": "Vybrané projekty"
+  },
+  "about": {
+    "subtitle": "O mne",
+    "title": "Video produkcia",
+    "bio1": "Robím videá pre značky, malé firmy a vlastné projekty. Strihám, robia motion graphics a color grading.",
+    "bio2": "Pracujem s Premiere Pro, DaVinci Resolve a After Effects. Viac ako je potreby corporate hovoru – len dobrý strih a dobrý obraz.",
+    "bio3": "",
+    "skills": "Zručnosti",
+    "experience": "Skúsenosti",
+    "current": "Aktuálne",
+    "freelance": "Freelance multimediálny tvorca",
+    "freelanceDate": "2024 - súčasnosť"
+  },
+  "contact": {
+    "subtitle": "Kontakt",
+    "title": "Napíš mi",
+    "name": "Meno",
+    "namePlaceholder": "Vaše meno",
+    "email": "Email",
+    "emailPlaceholder": "vas.email@priklad.sk",
+    "message": "Správa",
+    "messagePlaceholder": "Napíšte mi o svojom projekte...",
+    "send": "Odoslať správu",
+    "connect": "Spojte sa so mnou",
+    "emailLabel": "Email",
+    "instagramLabel": "Instagram",
+    "linkedinLabel": "LinkedIn",
+    "vimeoLabel": "Vimeo"
+  },
+  "projectDetail": {
+    "back": "← Späť na projekty",
+    "aboutProject": "O projekte",
+    "technologies": "Použité technológie",
+    "projectDetails": "Detaily projektu",
+    "category": "Kategória",
+    "year": "Rok",
+    "workWithMe": "Spolupracovať",
+    "gallery": "Galéria",
+    "moreProjects": "Ďalšie projekty"
+  }
+}

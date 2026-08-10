@@ -1,0 +1,90 @@
+---
+import Container from "../components/Container.astro";
+import Button from "../components/Button.astro";
+import { getTranslation } from "../i18n/index";
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = "sk" } = Astro.props;
+
+const t = (key: string) => getTranslation(lang, key);
+---
+
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+  <!-- Background gradient effects -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-br from-yellow-400/20 to-transparent rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-gradient-to-tl from-cyan-400/20 to-transparent rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+  </div>
+
+  <Container>
+    <div class="grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <!-- Left Content -->
+      <div class="space-y-8 animate-fade-up">
+        <!-- Availability Badge -->
+        <div class="inline-flex items-center gap-2 rounded-full glass px-4 py-2 w-fit hover-lift hero-badge">
+          <div class="w-2 h-2 rounded-full bg-lime-400 animate-pulse-glow"></div>
+          <span class="text-sm font-medium">{t('hero.available')}</span>
+        </div>
+
+        <!-- Name -->
+        <div class="space-y-4">
+          <h1 class="heading-font text-6xl md:text-7xl font-bold leading-tight">
+            <span class="gradient-text">{t('hero.title')}</span>
+          </h1>
+          <p class="text-2xl md:text-3xl text-neutral-400 font-light">
+            {t('hero.subtitle')}
+          </p>
+        </div>
+
+        <!-- Description -->
+        <p class="text-lg text-neutral-400 leading-relaxed max-w-md">
+          {t('hero.description')}
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <Button href={lang === "en" ? "/en#contact" : "/#contact"} variant="primary" class="glow-accent">
+            {t('hero.cta1')}
+          </Button>
+          <Button href={lang === "en" ? "/en#work" : "/#work"} variant="secondary">
+            {t('hero.cta2')}
+          </Button>
+        </div>
+      </div>
+
+      <!-- Right - Profile Image -->
+      <div class="relative h-96 md:h-full min-h-96 animate-scale-in" style="animation-delay: 0.3s;">
+        <!-- Main profile container with gradient border -->
+        <div class="absolute inset-0 rounded-3xl overflow-hidden hover-lift transition-all duration-300">
+          <!-- Gradient border effect -->
+          <div class="absolute inset-0 bg-linear-to-br from-yellow-400/30 via-transparent to-cyan-400/30 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+          
+          <!-- Profile image with overlay -->
+          <div class="absolute inset-0 rounded-3xl overflow-hidden glass">
+            <img
+              src="/images/projects/profile.jpg"
+              alt="Simon Mészáros"
+              class="w-full h-full object-cover"
+            />
+            <!-- Subtle dark overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+          </div>
+        </div>
+
+        <!-- Decorative blur circles -->
+        <div class="absolute -top-20 -right-20 w-64 h-64 bg-lime-400/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-cyan-400/10 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <a href={lang === "en" ? "/en#work" : "/#work"} class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce inline-flex items-center justify-center rounded-full border border-white/10 bg-black/40 p-3 transition hover:bg-white/10 hover-lift">
+      <svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </a>
+  </Container>
+</section>

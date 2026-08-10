@@ -1,0 +1,14 @@
+---
+interface Props {
+    href?: string
+}
+
+const { href } = Astro.props
+---
+
+<div
+  class="mx-auto w-full px-6 lg:px-10"
+  style={`max-width: var(--container)`}
+>
+  <slot />
+</div>

@@ -1,0 +1,161 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import VideoPlayer from "../../components/VideoPlayer.astro";
+import Button from "../../components/Button.astro";
+import { projects } from "../../data/projects";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Project {
+  slug: string;
+  title: string;
+  category: string;
+  year: number;
+  image: string;
+  video: string;
+  description?: string;
+  details?: string;
+  technologies?: string[];
+  gallery?: string[];
+}
+
+const { project } = Astro.props as { project: Project };
+const relatedProjects = projects
+  .filter((p) => p.slug !== project.slug)
+  .sort(() => Math.random() - 0.5)
+  .slice(0, 2);
+const isEnglish = Astro.url.pathname.startsWith('/en');
+const homeHref = isEnglish ? '/en' : '/';
+const description = project.description ?? `${project.title} is a cinematic video project created for a dynamic visual experience.`;
+const details = project.details ?? 'This project was edited with a strong focus on pacing, composition, and polished color grading.';
+const technologies = project.technologies ?? [];
+const gallery = project.gallery ?? [];
+---
+
+<BaseLayout title={`${project.title} — Portfolio`}>
+  <main class="pt-32">
+    <Container>
+      <!-- Header -->
+      <div class="mb-12">
+        <Button href={homeHref} variant="secondary">← Back to Portfolio</Button>
+        <h1 class="heading-font text-5xl md:text-6xl font-bold mt-8 mb-4">
+          {project.title}
+        </h1>
+        <div class="flex flex-wrap gap-4 text-neutral-400 mb-8">
+          <span>{project.category}</span>
+          <span>•</span>
+          <span>{project.year}</span>
+        </div>
+        <p class="text-xl text-neutral-300 max-w-3xl">
+          {description}
+        </p>
+      </div>
+
+      <!-- Video -->
+      <div class="mb-16 max-w-4xl">
+        <VideoPlayer
+          src={project.video}
+          poster={project.image}
+          title={project.title}
+        />
+      </div>
+
+      <!-- Details -->
+      <div class="grid gap-12 lg:grid-cols-3 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="heading-font text-3xl font-bold mb-6">About This Project</h2>
+          <p class="text-lg text-neutral-300 leading-relaxed mb-6">
+            {details}
+          </p>
+
+          <!-- Technologies Used -->
+          <div>
+            <h3 class="heading-font text-2xl font-bold mb-4">Technologies Used</h3>
+            <div class="flex flex-wrap gap-3">
+              {technologies.length > 0 ? (
+                technologies.map((tech) => (
+                  <span class="rounded-full border border-neutral-700 bg-neutral-900 px-4 py-2 text-sm">
+                    {tech}
+                  </span>
+                ))
+              ) : (
+                <span class="text-neutral-500">No technologies listed</span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Info Sidebar -->
+        <div class="rounded-2xl border border-neutral-800 bg-neutral-950 p-8 h-fit">
+          <h3 class="heading-font text-xl font-bold mb-6">Project Details</h3>
+          <div class="space-y-6">
+            <div>
+              <p class="text-sm text-neutral-500 mb-2">Category</p>
+              <p class="font-semibold">{project.category}</p>
+            </div>
+            <div>
+              <p class="text-sm text-neutral-500 mb-2">Year</p>
+              <p class="font-semibold">{project.year}</p>
+            </div>
+            <div class="pt-6 border-t border-neutral-800">
+              <Button href={`${homeHref}#contact`} class="w-full justify-center">
+                Work With Me
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Gallery -->
+      {gallery.length > 0 && (
+        <div class="mb-16">
+          <h2 class="heading-font text-3xl font-bold mb-8">Gallery</h2>
+          <div class="grid gap-6 md:grid-cols-2">
+            {gallery.map((image) => (
+              <div class="overflow-hidden rounded-2xl">
+                <img
+                  src={image}
+                  alt={`${project.title} gallery image`}
+                  class="w-full h-auto object-cover hover:scale-105 transition duration-300"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Related Projects -->
+      {relatedProjects.length > 0 && (
+        <div class="border-t border-neutral-800 pt-16">
+          <h2 class="heading-font text-3xl font-bold mb-8">More Projects</h2>
+          <div class="grid gap-8 lg:grid-cols-2">
+            {relatedProjects.map((relatedProject) => (
+              <a
+                href={`/projects/${relatedProject.slug}`}
+                class="group block"
+              >
+                <div class="overflow-hidden rounded-2xl mb-4">
+                  <img
+                    src={relatedProject.image}
+                    alt={relatedProject.title}
+                    class="aspect-video w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <h3 class="heading-font text-2xl font-bold group-hover:text-neutral-300 transition">
+                  {relatedProject.title}
+                </h3>
+                <p class="text-neutral-500 mt-2">{relatedProject.category}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </Container>
+  </main>
+</BaseLayout>

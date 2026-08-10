@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "work": "Projects",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "available": "Open for work",
+    "title": "Simon Mészáros",
+    "subtitle": "Video & motion graphics",
+    "description": "I make videos, commercials and motion graphics. Good editing, good visuals, good pacing.",
+    "cta1": "Get In Touch",
+    "cta2": "My Work"
+  },
+  "projects": {
+    "subtitle": "My Work",
+    "title": "Featured Projects"
+  },
+  "about": {
+    "subtitle": "About",
+    "title": "Video Production",
+    "bio1": "I make videos for brands, businesses and personal projects. I edit, do motion graphics and color grading.",
+    "bio2": "I work with Premiere Pro, DaVinci Resolve and After Effects. Less talking, more good editing and good visuals.",
+    "bio3": "",
+    "skills": "Skills",
+    "experience": "Experience",
+    "current": "Currently",
+    "freelance": "Freelance Multimedia Creator",
+    "freelanceDate": "2024 - Present"
+  },
+  "contact": {
+    "subtitle": "Contact",
+    "title": "Get In Touch",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "your.email@example.com",
+    "message": "Message",
+    "messagePlaceholder": "Tell me about your project...",
+    "send": "Send Message",
+    "connect": "Connect With Me",
+    "emailLabel": "Email",
+    "instagramLabel": "Instagram",
+    "linkedinLabel": "LinkedIn",
+    "vimeoLabel": "Vimeo"
+  },
+  "projectDetail": {
+    "back": "← Back to Projects",
+    "aboutProject": "About This Project",
+    "technologies": "Technologies Used",
+    "projectDetails": "Project Details",
+    "category": "Category",
+    "year": "Year",
+    "workWithMe": "Collaborate",
+    "gallery": "Gallery",
+    "moreProjects": "More Projects"
+  }
+}

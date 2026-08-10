@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../sections/Hero.astro";
+import Projects from "../../sections/Projects.astro";
+import About from "../../sections/About.astro";
+import Contact from "../../sections/Contact.astro";
+
+const lang = "en";
+---
+
+<BaseLayout title="Simon Mészáros - Portfolio" lang={lang}>
+
+  <Hero lang={lang} />
+  <Projects lang={lang} />
+  <About lang={lang} />
+  <Contact lang={lang} />
+
+</BaseLayout>

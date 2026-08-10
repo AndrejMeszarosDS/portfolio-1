@@ -1,0 +1,90 @@
+---
+interface Props {
+  lang?: string;
+}
+
+const { lang = "sk" } = Astro.props;
+---
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const closeButton = document.getElementById("mobile-menu-close");
+    const navLinks = document.querySelectorAll("#mobile-menu a");
+
+    if (menuButton && mobileMenu) {
+      menuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      if (closeButton) {
+        closeButton.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      }
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
+    }
+  });
+</script>
+
+<button
+  id="mobile-menu-button"
+  class="lg:hidden p-2 text-neutral-400 hover:text-white transition"
+  aria-label="Toggle menu"
+>
+  <svg
+    class="w-6 h-6"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M4 6h16M4 12h16M4 18h16"
+    ></path>
+  </svg>
+</button>
+
+<div
+  id="mobile-menu"
+  class="hidden fixed inset-0 top-20 z-40 bg-black bg-opacity-95 lg:hidden"
+>
+  <div class="flex flex-col space-y-6 p-6">
+    <a href={lang === "en" ? "/en#work" : "/#work"} class="text-lg font-semibold text-neutral-300 hover:text-white transition">
+      {lang === "en" ? "Work" : "Práce"}
+    </a>
+    <a href={lang === "en" ? "/en#about" : "/#about"} class="text-lg font-semibold text-neutral-300 hover:text-white transition">
+      {lang === "en" ? "About" : "O mne"}
+    </a>
+    <a href={lang === "en" ? "/en#contact" : "/#contact"} class="text-lg font-semibold text-neutral-300 hover:text-white transition">
+      {lang === "en" ? "Contact" : "Kontakt"}
+    </a>
+  </div>
+  <button
+    id="mobile-menu-close"
+    class="absolute top-4 right-4 text-neutral-400 hover:text-white"
+    aria-label="Close menu"
+  >
+    <svg
+      class="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      ></path>
+    </svg>
+  </button>
+</div>
