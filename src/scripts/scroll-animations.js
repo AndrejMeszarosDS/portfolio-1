@@ -45,6 +45,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  const autoplayVideos = document.querySelectorAll('video[data-autoplay]');
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (!(video instanceof HTMLVideoElement)) return;
+
+      if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
+        if (video.paused && video.muted) {
+          video.play().catch(() => null);
+        }
+      } else {
+        if (!video.paused) {
+          video.pause();
+        }
+      }
+    });
+  }, {
+    root: null,
+    threshold: [0.35]
+  });
+
+  autoplayVideos.forEach(video => videoObserver.observe(video));
+
   // Parallax effect for floating elements
   const floatingElements = document.querySelectorAll('.animate-float');
   window.addEventListener('scroll', () => {
