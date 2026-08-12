@@ -24,7 +24,11 @@ const t = (key: string) => getTranslation(lang, key);
 
     <div class="mx-auto max-w-2xl mt-16">
       <div class="rounded-2xl glass gradient-border p-12 scroll-reveal">
-        <form class="space-y-6">
+        <form
+          action="https://formspree.io/f/xljrngor"
+          method="POST"
+          class="space-y-6"
+        >
           <div>
             <label for="name" class="block text-sm font-semibold mb-2">
               {t('contact.name')}
