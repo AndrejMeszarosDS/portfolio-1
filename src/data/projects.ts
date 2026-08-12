@@ -144,7 +144,7 @@ export const projects = [
   },
   {
     slug: "milionar",
-    title: "Business Self-Promo",
+    title: "Business Promo",
     category: "Short",
     year: 2025,
     image: "/images/projects/milionar-poster.jpg",
