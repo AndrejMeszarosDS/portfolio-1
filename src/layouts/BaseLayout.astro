@@ -8,14 +8,20 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 interface Props {
   title?: string;
   lang?: string;
+  description?: string;
+  image?: string;
 }
 
 const {
   title = 'Portfolio',
   lang = 'sk',
+  description = 'Simon Mészáros - Visual Storyteller specializing in cinematic video production, motion graphics, and color grading.',
+  image = 'https://yourdomain.com/images/projects/profile.jpg',
 } = Astro.props;
 
 const htmlLang = lang === 'en' ? 'en-US' : 'sk-SK';
+const siteUrl = 'https://yourdomain.com';
+const fullUrl = `${siteUrl}${Astro.url.pathname}`;
 ---
 
 <!doctype html>
@@ -25,6 +31,29 @@ const htmlLang = lang === 'en' ? 'en-US' : 'sk-SK';
   <meta name="viewport" content="width=device-width" />
   <title>{title}</title>
   
+  <!-- SEO Meta Tags -->
+  <meta name="description" content={description} />
+  <meta name="keywords" content="video editor, motion graphics, color grading, video production, Premiere Pro, DaVinci Resolve, After Effects, visual storytelling, multimedia creator, Slovakia" />
+  <meta name="author" content="Simon Mészáros" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={fullUrl} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+  <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'sk_SK'} />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={fullUrl} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={image} />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href={fullUrl} />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

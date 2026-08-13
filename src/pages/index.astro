@@ -9,7 +9,12 @@ import { getLanguageFromUrl } from "../i18n/index";
 const lang = getLanguageFromUrl(Astro.url.pathname);
 ---
 
-<BaseLayout title="Simon Mészáros - Portfolio" lang={lang}>
+<BaseLayout 
+  title="Simon Mészáros - Visual Storyteller Portfolio" 
+  lang={lang}
+  description="Simon Mészáros - Visual Storyteller specializing in cinematic video production, motion graphics, and color grading. Professional video editor and multimedia creator based in Slovakia."
+  image="https://yourdomain.com/images/projects/profile.jpg"
+>
 
   <Hero lang={lang} />
   <Projects lang={lang} />

@@ -36,9 +36,16 @@ const description = project.description ?? `${project.title} is a cinematic vide
 const details = project.details ?? 'This project was edited with a strong focus on pacing, composition, and polished color grading.';
 const technologies = project.technologies ?? [];
 const gallery = project.gallery ?? [];
+const siteUrl = 'https://meszaros-portfolio.netlify.app';
+const fullImageUrl = project.image.startsWith('http') ? project.image : `${siteUrl}${project.image}`;
 ---
 
-<BaseLayout title={`${project.title} — Portfolio`}>
+<BaseLayout 
+  title={`${project.title} — Simon Mészáros Portfolio`}
+  lang={isEnglish ? 'en' : 'sk'}
+  description={description}
+  image={fullImageUrl}
+>
   <main class="pt-32">
     <Container>
       <!-- Header -->

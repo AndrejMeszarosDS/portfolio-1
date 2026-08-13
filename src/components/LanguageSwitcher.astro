@@ -6,6 +6,12 @@ interface Props {
 }
 
 const { currentLang } = Astro.props;
+
+// Get current path without language prefix
+const pathname = Astro.url.pathname;
+const isEnglishPage = pathname.startsWith('/en');
+const basePath = isEnglishPage ? pathname.slice(3) : pathname; // Remove /en prefix if present
+const finalPath = basePath || '/'; // Default to / if empty
 ---
 
 <div class="relative group">
@@ -21,18 +27,30 @@ const { currentLang } = Astro.props;
 
   <!-- Language dropdown -->
   <div class="absolute right-0 mt-2 w-32 rounded-lg border border-neutral-700 bg-neutral-900 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-    {Object.entries(languages).map(([code, name]) => (
-      <a
-        href={code === "sk" ? "/" : `/en${Astro.url.pathname === "/" ? "" : Astro.url.pathname}`}
-        class={`block w-full px-4 py-2 text-left text-sm transition ${
-          currentLang === code
-            ? "bg-neutral-700 text-white"
-            : "text-neutral-400 hover:text-white hover:bg-neutral-800"
-        }`}
-      >
-        {name}
-      </a>
-    ))}
+    {Object.entries(languages).map(([code, name]) => {
+      // Generate correct href based on current language and target language
+      let href = '';
+      if (code === 'sk') {
+        // Switch to Slovak: remove /en prefix if present
+        href = isEnglishPage ? finalPath : '/';
+      } else {
+        // Switch to English: add /en prefix if not already present
+        href = isEnglishPage ? pathname : `/en${finalPath}`;
+      }
+      
+      return (
+        <a
+          href={href}
+          class={`block w-full px-4 py-2 text-left text-sm transition ${
+            currentLang === code
+              ? "bg-neutral-700 text-white"
+              : "text-neutral-400 hover:text-white hover:bg-neutral-800"
+          }`}
+        >
+          {name}
+        </a>
+      );
+    })}
   </div>
 </div>
 
