@@ -17,22 +17,43 @@ const { title, category, year, image, video, slug } = Astro.props
         <div class="overflow-hidden rounded-3xl relative aspect-video bg-black">
 
             {video ? (
-              <video
-                src={video}
-                poster={image}
-                class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105"
-                muted
-                autoplay
-                loop
-                playsinline
-                preload="metadata"
-                data-autoplay
-              />
+              <>
+                <img
+                  src={image}
+                  alt={`${title} project preview`}
+                  class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105 video-poster"
+                  loading="lazy"
+                  decoding="async"
+                />
+
+                <video
+                  src={video}
+                  poster={image}
+                  class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105 opacity-0"
+                  muted
+                  autoplay
+                  loop
+                  playsinline
+                  webkit-playsinline
+                  preload="auto"
+                  data-autoplay
+                />
+
+                <div class="absolute inset-0 flex items-center justify-center bg-black/30 opacity-100 md:opacity-0 transition duration-300 pointer-events-none md:pointer-events-auto">
+                  <div class="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-full border border-white/40 bg-black/50 text-white shadow-lg cursor-pointer hover:bg-black/70 transition" data-play-btn>
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                    </svg>
+                  </div>
+                </div>
+              </>
             ) : (
               <img
                 src={image}
                 alt={`${title} project preview`}
                 class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
             )}
 
@@ -49,21 +70,21 @@ const { title, category, year, image, video, slug } = Astro.props
 
         </div>
 
-        <div class="mt-6 flex items-center justify-between">
+        <div class="mt-4 sm:mt-6 flex items-center justify-between">
 
             <div>
 
-                <h3 class="text-3xl font-semibold transition group-hover:text-neutral-300 text-white">
+                <h3 class="text-xl sm:text-2xl lg:text-3xl font-semibold transition group-hover:text-neutral-300 text-white">
                     {title}
                 </h3>
 
-                <p class="mt-2 text-neutral-500">
+                <p class="mt-1 sm:mt-2 text-sm sm:text-base text-neutral-500">
                     {category}
                 </p>
 
             </div>
 
-            <span class="text-neutral-500">
+            <span class="text-sm sm:text-base text-neutral-500">
                 {year}
             </span>
 

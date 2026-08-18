@@ -17,7 +17,7 @@ const t = (key: string) => getTranslation(lang, key);
 
 <section
   id="work"
-  class="py-32 relative overflow-hidden"
+  class="py-20 lg:py-32 relative overflow-hidden"
 >
   <!-- Background decoration -->
   <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-cyan-400/10 to-transparent rounded-full blur-3xl"></div>
@@ -30,7 +30,7 @@ const t = (key: string) => getTranslation(lang, key);
       />
     </div>
 
-    <div class="grid gap-8 lg:grid-cols-2 mt-16">
+    <div class="grid gap-6 sm:gap-8 lg:grid-cols-2 mt-12 lg:mt-16">
 
       {projects
         .slice()

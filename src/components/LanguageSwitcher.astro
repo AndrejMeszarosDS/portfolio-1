@@ -53,14 +53,3 @@ const finalPath = basePath || '/'; // Default to / if empty
     })}
   </div>
 </div>
-
-<script>
-  // Handle language switching
-  document.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
-    const link = target.closest("a[href*='/en'], a[href^='/']") as HTMLAnchorElement;
-    if (link) {
-      localStorage.setItem("preferredLanguage", link.href.includes("/en") ? "en" : "sk");
-    }
-  });
-</script>

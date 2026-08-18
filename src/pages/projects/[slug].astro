@@ -4,6 +4,7 @@ import Container from "../../components/Container.astro";
 import VideoPlayer from "../../components/VideoPlayer.astro";
 import Button from "../../components/Button.astro";
 import { projects } from "../../data/projects";
+import { getTranslation } from "../../i18n/index";
 
 export function getStaticPaths() {
   return projects.map((project) => ({
@@ -27,13 +28,14 @@ interface Project {
 
 const { project } = Astro.props as { project: Project };
 const relatedProjects = projects
-  .filter((p) => p.slug !== project.slug)
-  .sort(() => Math.random() - 0.5)
+  .filter((p) => p.slug !== project.slug && p.category === project.category)
   .slice(0, 2);
 const isEnglish = Astro.url.pathname.startsWith('/en');
+const lang = isEnglish ? 'en' : 'sk';
+const t = (key: string) => getTranslation(lang, key);
 const homeHref = isEnglish ? '/en' : '/';
-const description = project.description ?? `${project.title} is a cinematic video project created for a dynamic visual experience.`;
-const details = project.details ?? 'This project was edited with a strong focus on pacing, composition, and polished color grading.';
+const description = project.description ?? t('projectDetail.defaultDescription');
+const details = project.details ?? t('projectDetail.defaultDetails');
 const technologies = project.technologies ?? [];
 const gallery = project.gallery ?? [];
 const siteUrl = 'https://meszaros-portfolio.netlify.app';
@@ -50,7 +52,7 @@ const fullImageUrl = project.image.startsWith('http') ? project.image : `${siteU
     <Container>
       <!-- Header -->
       <div class="mb-12">
-        <Button href={homeHref} variant="secondary">← Back to Portfolio</Button>
+        <Button href={homeHref} variant="secondary">{t('projectDetail.back')}</Button>
         <h1 class="heading-font text-5xl md:text-6xl font-bold mt-8 mb-4">
           {project.title}
         </h1>
@@ -76,14 +78,14 @@ const fullImageUrl = project.image.startsWith('http') ? project.image : `${siteU
       <!-- Details -->
       <div class="grid gap-12 lg:grid-cols-3 mb-16">
         <div class="lg:col-span-2">
-          <h2 class="heading-font text-3xl font-bold mb-6">About This Project</h2>
+          <h2 class="heading-font text-3xl font-bold mb-6">{t('projectDetail.aboutProject')}</h2>
           <p class="text-lg text-neutral-300 leading-relaxed mb-6">
             {details}
           </p>
 
           <!-- Technologies Used -->
           <div>
-            <h3 class="heading-font text-2xl font-bold mb-4">Technologies Used</h3>
+            <h3 class="heading-font text-2xl font-bold mb-4">{t('projectDetail.technologies')}</h3>
             <div class="flex flex-wrap gap-3">
               {technologies.length > 0 ? (
                 technologies.map((tech) => (
@@ -92,7 +94,7 @@ const fullImageUrl = project.image.startsWith('http') ? project.image : `${siteU
                   </span>
                 ))
               ) : (
-                <span class="text-neutral-500">No technologies listed</span>
+                <span class="text-neutral-500">{t('projectDetail.noTechnologies')}</span>
               )}
             </div>
           </div>
@@ -100,47 +102,29 @@ const fullImageUrl = project.image.startsWith('http') ? project.image : `${siteU
 
         <!-- Project Info Sidebar -->
         <div class="rounded-2xl border border-neutral-800 bg-neutral-950 p-8 h-fit">
-          <h3 class="heading-font text-xl font-bold mb-6">Project Details</h3>
+          <h3 class="heading-font text-xl font-bold mb-6">{t('projectDetail.projectDetails')}</h3>
           <div class="space-y-6">
             <div>
-              <p class="text-sm text-neutral-500 mb-2">Category</p>
+              <p class="text-sm text-neutral-500 mb-2">{t('projectDetail.category')}</p>
               <p class="font-semibold">{project.category}</p>
             </div>
             <div>
-              <p class="text-sm text-neutral-500 mb-2">Year</p>
+              <p class="text-sm text-neutral-500 mb-2">{t('projectDetail.year')}</p>
               <p class="font-semibold">{project.year}</p>
             </div>
             <div class="pt-6 border-t border-neutral-800">
               <Button href={`${homeHref}#contact`} class="w-full justify-center">
-                Work With Me
+                {t('projectDetail.workWithMe')}
               </Button>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Image Gallery -->
-      {gallery.length > 0 && (
-        <div class="mb-16">
-          <h2 class="heading-font text-3xl font-bold mb-8">Gallery</h2>
-          <div class="grid gap-6 md:grid-cols-2">
-            {gallery.map((image) => (
-              <div class="overflow-hidden rounded-2xl">
-                <img
-                  src={image}
-                  alt={`${project.title} gallery image`}
-                  class="w-full h-auto object-cover hover:scale-105 transition duration-300"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       <!-- Related Projects -->
       {relatedProjects.length > 0 && (
         <div class="border-t border-neutral-800 pt-16">
-          <h2 class="heading-font text-3xl font-bold mb-8">More Projects</h2>
+          <h2 class="heading-font text-3xl font-bold mb-8">{t('projectDetail.moreProjects')}</h2>
           <div class="grid gap-8 lg:grid-cols-2">
             {relatedProjects.map((relatedProject) => (
               <a

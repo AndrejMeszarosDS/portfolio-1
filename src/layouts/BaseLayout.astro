@@ -4,6 +4,7 @@ import Navbar from "../components/layout/Navbar.astro";
 import CursorFollower from "../components/CursorFollower.astro";
 import InteractiveParticles from "../components/InteractiveParticles.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
+import ScrollToTop from "../components/ScrollToTop.astro";
 
 interface Props {
   title?: string;
@@ -13,14 +14,14 @@ interface Props {
 }
 
 const {
-  title = 'Portfolio',
+  title = "Simon's Portfolio",
   lang = 'sk',
-  description = 'Simon Mészáros - Visual Storyteller specializing in cinematic video production, motion graphics, and color grading.',
-  image = 'https://yourdomain.com/images/projects/profile.jpg',
+  description = 'Simon Mészáros - Video editor and filmmaker based in Slovakia. Creating videos and editing projects.',
+  image = 'https://meszaros-portfolio.netlify.app/images/projects/profile.jpg',
 } = Astro.props;
 
 const htmlLang = lang === 'en' ? 'en-US' : 'sk-SK';
-const siteUrl = 'https://yourdomain.com';
+const siteUrl = 'https://meszaros-portfolio.netlify.app';
 const fullUrl = `${siteUrl}${Astro.url.pathname}`;
 ---
 
@@ -33,10 +34,10 @@ const fullUrl = `${siteUrl}${Astro.url.pathname}`;
   
   <!-- SEO Meta Tags -->
   <meta name="description" content={description} />
-  <meta name="keywords" content="video editor, motion graphics, color grading, video production, Premiere Pro, DaVinci Resolve, After Effects, visual storytelling, multimedia creator, Slovakia" />
+  <meta name="keywords" content="video editor, filmmaker, video production, editing, Premiere Pro, After Effects, Slovakia, Simon Mészáros" />
   <meta name="author" content="Simon Mészáros" />
   <meta name="robots" content="index, follow" />
-  
+ 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content={fullUrl} />
@@ -54,6 +55,10 @@ const fullUrl = `${siteUrl}${Astro.url.pathname}`;
   
   <!-- Canonical URL -->
   <link rel="canonical" href={fullUrl} />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,6 +74,7 @@ const fullUrl = `${siteUrl}${Astro.url.pathname}`;
   <InteractiveParticles />
   <CursorFollower />
   <ThemeToggle />
+  <ScrollToTop />
   <Navbar />
 
   <main>
@@ -76,6 +82,12 @@ const fullUrl = `${siteUrl}${Astro.url.pathname}`;
   </main>
 
   <script src="../scripts/scroll-animations.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
 
 </body>
 </html>

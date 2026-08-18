@@ -13,7 +13,7 @@ const { lang = "sk" } = Astro.props;
 const t = (key: string) => getTranslation(lang, key);
 ---
 
-<section id="contact" class="py-32 relative overflow-hidden">
+<section id="contact" class="py-20 lg:py-32 relative overflow-hidden">
   <!-- Background decoration -->
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-yellow-400/10 to-cyan-400/10 rounded-full blur-3xl"></div>
   
@@ -22,13 +22,18 @@ const t = (key: string) => getTranslation(lang, key);
       <SectionTitle subtitle={t('contact.subtitle')} title={t('contact.title')} />
     </div>
 
-    <div class="mx-auto max-w-2xl mt-16">
-      <div class="rounded-2xl glass gradient-border p-12 scroll-reveal">
+    <div class="mx-auto max-w-2xl mt-12 lg:mt-16">
+      <div class="rounded-2xl glass gradient-border p-6 sm:p-8 lg:p-12 scroll-reveal">
         <form
           action="https://formspree.io/f/xljrngor"
           method="POST"
-          class="space-y-6"
+          class="space-y-4 sm:space-y-6"
+          id="contact-form"
         >
+          <!-- Hidden fields for Formspree -->
+          <input type="hidden" name="_subject" value="New Contact Form Submission from Portfolio" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="" />
           <div>
             <label for="name" class="block text-sm font-semibold mb-2">
               {t('contact.name')}
@@ -74,9 +79,13 @@ const t = (key: string) => getTranslation(lang, key);
           <button
             type="submit"
             class="w-full rounded-lg bg-white px-6 py-3 font-semibold text-black transition hover:bg-neutral-200 hover-lift glow-accent"
+            id="submit-btn"
           >
             {t('contact.send')}
           </button>
+
+          <!-- Success/Error Messages -->
+          <div id="form-message" class="hidden"></div>
         </form>
 
         <div class="mt-12 border-t border-neutral-800 pt-12">
@@ -118,3 +127,93 @@ const t = (key: string) => getTranslation(lang, key);
     </div>
   </Container>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const formMessage = document.getElementById('form-message') as HTMLDivElement;
+
+    if (!form || !submitBtn || !formMessage) return;
+
+    const currentLang = document.documentElement.lang.startsWith('en') ? 'en' : 'sk';
+
+    const messages = {
+      en: {
+        sending: 'Sending...',
+        success: 'Thank you! Your message has been sent successfully.',
+        error: 'Oops! There was a problem sending your message. Please try again.',
+        networkError: 'Network error. Please check your connection and try again.',
+        formNotFound: 'Form not found. Please contact me directly at simon07meszaros@gmail.com',
+        send: 'Send Message'
+      },
+      sk: {
+        sending: 'Odosielam...',
+        success: 'Ďakujeme! Vaša správa bola úspešne odoslaná.',
+        error: 'Ups! Pri odosielaní správy nastal problém. Skúste to znova.',
+        networkError: 'Chyba siete. Skontrolujte pripojenie a skúste to znova.',
+        formNotFound: 'Formulár nenájdený. Kontaktujte ma priamo na simon07meszaros@gmail.com',
+        send: 'Odoslať správu'
+      }
+    };
+
+    const currentMessages = messages[currentLang as keyof typeof messages] || messages.en;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Disable submit button and show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = currentMessages.sending;
+      
+      const formData = new FormData(form);
+      
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        // Handle Formspree response
+        if (response.status === 404) {
+          formMessage.classList.remove('hidden');
+          formMessage.className = 'mt-4 p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400';
+          formMessage.textContent = currentMessages.formNotFound;
+          submitBtn.disabled = false;
+          submitBtn.textContent = currentMessages.send;
+          return;
+        }
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Success
+          formMessage.classList.remove('hidden');
+          formMessage.className = 'mt-4 p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-400';
+          formMessage.textContent = currentMessages.success;
+          
+          form.reset();
+        } else {
+          // Error
+          formMessage.classList.remove('hidden');
+          formMessage.className = 'mt-4 p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400';
+          formMessage.textContent = data.error || currentMessages.error;
+        }
+      } catch (error) {
+        // Network error
+        formMessage.classList.remove('hidden');
+        formMessage.className = 'mt-4 p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400';
+        formMessage.textContent = currentMessages.networkError;
+      } finally {
+        // Re-enable submit button if not already done
+        if (formMessage.textContent && !formMessage.textContent.includes(currentMessages.formNotFound)) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = currentMessages.send;
+        }
+      }
+    });
+  });
+</script>

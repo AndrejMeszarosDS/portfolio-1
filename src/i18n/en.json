@@ -5,10 +5,10 @@
     "contact": "Contact"
   },
   "hero": {
-    "available": "Open for work",
+    "available": "Available for work",
     "title": "Simon Mészáros",
-    "subtitle": "Video & motion graphics",
-    "description": "I make videos, commercials and motion graphics. Good editing, good visuals, good pacing.",
+    "subtitle": "Video Production",
+    "description": "I make videos and edit projects.",
     "cta1": "Get In Touch",
     "cta2": "My Work"
   },
@@ -19,10 +19,12 @@
   "about": {
     "subtitle": "About",
     "title": "Video Production",
-    "bio1": "I make videos for brands, businesses and personal projects. I edit, do motion graphics and color grading.",
-    "bio2": "I work with Premiere Pro, DaVinci Resolve and After Effects. Less talking, more good editing and good visuals.",
+    "bio1": "Video production.",
+    "bio2": "",
     "bio3": "",
     "skills": "Skills",
+    "about": "About",
+    "bioText": "Video production.",
     "experience": "Experience",
     "current": "Currently",
     "freelance": "Freelance Multimedia Creator",
@@ -53,6 +55,9 @@
     "year": "Year",
     "workWithMe": "Collaborate",
     "gallery": "Gallery",
-    "moreProjects": "More Projects"
+    "moreProjects": "More Projects",
+    "defaultDescription": "Video project created for a dynamic visual experience.",
+    "defaultDetails": "This project was edited with a strong focus on pacing, composition, and polished color grading.",
+    "noTechnologies": "No technologies listed"
   }
 }

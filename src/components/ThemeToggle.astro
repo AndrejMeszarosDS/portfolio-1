@@ -40,7 +40,6 @@
       sunIcon?.classList.toggle('hidden', darkMode);
       moonIcon?.classList.toggle('hidden', !darkMode);
       themeBtn?.setAttribute('aria-pressed', String(!darkMode));
-      window.localStorage.setItem('theme', darkMode ? 'dark' : 'light');
     }
 
     applyTheme(isDark);

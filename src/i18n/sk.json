@@ -5,10 +5,10 @@
     "contact": "Kontakt"
   },
   "hero": {
-    "available": "Otvorený na projekty",
+    "available": "Dostupný pre prácu",
     "title": "Simon Mészáros",
-    "subtitle": "Video a motion graphics",
-    "description": "Robím videá, komerčné projekty a motion graphics. Zameriam sa na čistý strih, dobrú atmosféru a to aby to vyzeralo dobre.",
+    "subtitle": "Video produkcia",
+    "description": "Robím videá a strihám projekty.",
     "cta1": "Napíš mi",
     "cta2": "Moje práce"
   },
@@ -19,10 +19,12 @@
   "about": {
     "subtitle": "O mne",
     "title": "Video produkcia",
-    "bio1": "Robím videá pre značky, malé firmy a vlastné projekty. Strihám, robia motion graphics a color grading.",
-    "bio2": "Pracujem s Premiere Pro, DaVinci Resolve a After Effects. Viac ako je potreby corporate hovoru – len dobrý strih a dobrý obraz.",
+    "bio1": "Video produkcia.",
+    "bio2": "",
     "bio3": "",
     "skills": "Zručnosti",
+    "about": "O mne",
+    "bioText": "Video produkcia.",
     "experience": "Skúsenosti",
     "current": "Aktuálne",
     "freelance": "Freelance multimediálny tvorca",
@@ -53,6 +55,9 @@
     "year": "Rok",
     "workWithMe": "Spolupracovať",
     "gallery": "Galéria",
-    "moreProjects": "Ďalšie projekty"
+    "moreProjects": "Ďalšie projekty",
+    "defaultDescription": "Video projekt vytvorený pre dynamický vizuálny zážitok.",
+    "defaultDetails": "Tento projekt bol upravený so silným zameraním na tempo, kompozíciu a polish color grading.",
+    "noTechnologies": "Žiadne technológie uvedené"
   }
 }

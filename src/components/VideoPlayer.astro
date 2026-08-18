@@ -8,12 +8,13 @@ interface Props {
 const { src, poster, title } = Astro.props;
 ---
 
-<div class="overflow-hidden rounded-2xl border border-neutral-800 bg-black shadow-2xl flex items-center justify-center p-4">
+<div class="relative rounded-2xl bg-black shadow-2xl overflow-hidden">
+  <div id="video-progress" class="absolute top-0 left-0 h-1 bg-yellow-400 w-0 z-10 transition-all duration-300"></div>
   <video
     controls
     preload="metadata"
     poster={poster}
-    class="max-h-[70vh] max-w-full object-contain bg-black"
+    class="w-full aspect-video object-cover bg-black"
     title={title}
     playsinline
   >
@@ -21,3 +22,29 @@ const { src, poster, title } = Astro.props;
     Your browser does not support the video tag.
   </video>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('video');
+    const progressBar = document.getElementById('video-progress');
+    
+    if (video && progressBar) {
+      video.addEventListener('progress', () => {
+        if (video.buffered.length > 0) {
+          const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+          const duration = video.duration;
+          const percentage = (bufferedEnd / duration) * 100;
+          progressBar.style.width = `${percentage}%`;
+        }
+      });
+
+      video.addEventListener('canplaythrough', () => {
+        progressBar.style.opacity = '0';
+      });
+
+      video.addEventListener('waiting', () => {
+        progressBar.style.opacity = '1';
+      });
+    }
+  });
+</script>

@@ -17,12 +17,12 @@ html.light {
   --background: #f8fafc;
   --surface: rgba(255, 255, 255, 0.95);
   --text: #0f172a;
-  --text-secondary: #475569;
+  --text-secondary: #334155;
   --primary: #0f172a;
   --primary-hover: #1e293b;
   --accent: #b45309;
   --accent-secondary: #0ea5e9;
-  --border: rgba(148, 163, 184, 0.45);
+  --border: rgba(203, 213, 225, 0.5);
 }
 
 html.light body {
@@ -32,15 +32,15 @@ html.light body {
 
 html.light .glass {
   background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(148, 163, 184, 0.35);
+  border-color: rgba(203, 213, 225, 0.4);
   color: var(--text);
 }
 
 html.light input,
 html.light textarea {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.95);
   color: var(--text);
-  border-color: rgba(148, 163, 184, 0.45);
+  border-color: rgba(203, 213, 225, 0.5);
 }
 
 html.light .gradient-border::before {
@@ -62,28 +62,28 @@ html.light button {
 }
 
 html.light .text-neutral-500 {
-  color: #64748b !important;
+  color: #1e293b;
 }
 
 html.light .text-neutral-400 {
-  color: #475569 !important;
+  color: #334155;
 }
 
 html.light .bg-neutral-950\/80 {
-  background-color: rgba(255, 255, 255, 0.92) !important;
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 html.light .bg-neutral-900\/50 {
-  background-color: rgba(255, 255, 255, 0.85) !important;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 html.light .border-neutral-700,
 html.light .border-neutral-800 {
-  border-color: rgba(148, 163, 184, 0.35) !important;
+  border-color: rgba(203, 213, 225, 0.4);
 }
 
 html.light .bg-black\/20 {
-  background-color: rgba(15, 23, 42, 0.08) !important;
+  background-color: rgba(15, 23, 42, 0.05);
 }
 
 html.light .glass {
@@ -92,6 +92,27 @@ html.light .glass {
 
 html.light .gradient-text {
   opacity: 1;
+}
+
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #0f172a;
+}
+
+html.light .text-white {
+  color: #0f172a;
+}
+
+html.light .bg-white {
+  background-color: #ffffff;
+}
+
+html.light .border-white {
+  border-color: #cbd5e1;
 }
 
 html {

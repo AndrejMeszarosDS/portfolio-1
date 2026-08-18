@@ -12,7 +12,7 @@ const { lang = "sk" } = Astro.props;
 const t = (key: string) => getTranslation(lang, key);
 ---
 
-<section id="about" class="py-32 bg-neutral-950 relative overflow-hidden">
+<section id="about" class="py-20 lg:py-32 bg-neutral-950 relative overflow-hidden">
   <!-- Background decoration -->
   <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yellow-400/10 to-transparent rounded-full blur-3xl"></div>
   
@@ -21,45 +21,38 @@ const t = (key: string) => getTranslation(lang, key);
       <SectionTitle subtitle={t('about.subtitle')} title={t('about.title')} />
     </div>
 
-    <div class="grid gap-12 lg:grid-cols-2 mt-16">
-      <div class="space-y-6 scroll-reveal-left">
-        <p class="text-lg leading-relaxed text-neutral-300">
+    <div class="grid gap-8 lg:gap-12 lg:grid-cols-2 mt-12 lg:mt-16">
+      <div class="space-y-4 sm:space-y-6 scroll-reveal-left">
+        <p class="text-base sm:text-lg leading-relaxed text-neutral-300">
           {t('about.bio1')}
         </p>
 
-        <p class="text-lg leading-relaxed text-neutral-300">
+        <p class="text-base sm:text-lg leading-relaxed text-neutral-300">
           {t('about.bio2')}
         </p>
 
-        <p class="text-lg leading-relaxed text-neutral-300">
+        <p class="text-base sm:text-lg leading-relaxed text-neutral-300">
           {t('about.bio3')}
         </p>
       </div>
 
-      <div class="space-y-8 scroll-reveal-right">
-        <div class="glass rounded-2xl p-6 gradient-border">
-          <h3 class="heading-font mb-4 text-2xl font-bold">{t('about.skills')}</h3>
-          <div class="grid grid-cols-2 gap-4">
-            {["Editing", "Color Grading", "Motion Graphics", "Premiere Pro", "DaVinci Resolve", "After Effects"].map((skill) => (
-              <div class="rounded-lg border border-neutral-800 bg-neutral-900/50 px-4 py-3 text-center hover-lift hover:border-neutral-600 transition-colors">
+      <div class="space-y-6 sm:space-y-8 scroll-reveal-right">
+        <div class="glass rounded-2xl p-4 sm:p-6 gradient-border">
+          <h3 class="heading-font mb-3 sm:mb-4 text-xl sm:text-2xl font-bold">{t('about.skills')}</h3>
+          <div class="grid grid-cols-2 gap-3 sm:gap-4">
+            {["2D/Live Grafika", "Color Grading", "Premiere Pro", "After Effects", "Produkcia", "Gimbal Operator"].map((skill) => (
+              <div class="rounded-lg border border-neutral-800 bg-neutral-900/50 px-3 py-2 sm:px-4 sm:py-3 text-center text-sm sm:text-base hover-lift hover:border-neutral-600 transition-colors">
                 {skill}
               </div>
             ))}
           </div>
         </div>
 
-        <div class="glass rounded-2xl p-6 gradient-border">
-          <h3 class="heading-font mb-4 text-2xl font-bold">{t('about.experience')}</h3>
-          <div class="space-y-4">
-            <div class="border-l-2 border-yellow-400/50 pl-4 hover-lift">
-              <p class="font-semibold">Multimedia Student</p>
-              <p class="text-sm text-neutral-400">{t('about.current')}</p>
-            </div>
-            <div class="border-l-2 border-cyan-400/50 pl-4 hover-lift">
-              <p class="font-semibold">{t('about.freelance')}</p>
-              <p class="text-sm text-neutral-400">{t('about.freelanceDate')}</p>
-            </div>
-          </div>
+        <div class="glass rounded-2xl p-4 sm:p-6 gradient-border">
+          <h3 class="heading-font mb-3 sm:mb-4 text-xl sm:text-2xl font-bold">{t('about.about')}</h3>
+          <p class="text-sm sm:text-base text-neutral-300 leading-relaxed">
+            {t('about.bioText')}
+          </p>
         </div>
       </div>
     </div>

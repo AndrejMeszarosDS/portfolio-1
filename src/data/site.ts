@@ -1,11 +1,11 @@
 export const site = {
   name: "Simon Mészáros",
-  role: "Visual Storyteller",
+  role: "Videographer",
 
   hero: {
-    title: "Creating stories through motion.",
+    title: "Your imagination coming true.",
     description:
-      "Cinematic content and brand films crafted with a strong visual style and clean execution.",
+      "Cinematic content and brand films crafted with a visual style and clean execution.",
     button: "View Projects",
   },
 

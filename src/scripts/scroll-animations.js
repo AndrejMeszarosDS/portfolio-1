@@ -53,6 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
         if (video.paused && video.muted) {
+          if (video.readyState < 2) {
+            video.load();
+          }
           video.play().catch(() => null);
         }
       } else {
@@ -66,7 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
     threshold: [0.35]
   });
 
-  autoplayVideos.forEach(video => videoObserver.observe(video));
+  autoplayVideos.forEach(video => {
+    video.addEventListener('canplay', () => {
+      video.style.opacity = '1';
+      const poster = video.parentElement?.querySelector('.video-poster');
+      if (poster) poster.style.opacity = '0';
+    });
+
+    video.addEventListener('error', () => {
+      video.style.display = 'none';
+      const poster = video.parentElement?.querySelector('.video-poster');
+      if (poster) poster.style.opacity = '1';
+    });
+
+    videoObserver.observe(video);
+  });
 
   // Parallax effect for floating elements
   const floatingElements = document.querySelectorAll('.animate-float');
